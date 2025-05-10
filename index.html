@@ -1,140 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>My Full Calculator</title>
+  <title>Calculator Landing Page</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
+
+    * {
+      margin:0;
+      padding: 0;
+      box-sizing: border-box;
+      border-radius:8px;
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: Arial, sans-serif;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background-color:gray;
-      height: 100vh;
+      background-color:#A5A5A5;
     }
 
-    header {
-      background-color:#2196F3;
+    nav {
+      position: sticky;
+      top: 0;
+      background-color: #333;
       color: white;
-      padding: 20px;
-      text-align: center;
-      width: 100%;
-      font-size: 28px;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      z-index: 1000;
     }
 
+    /* Left Section for Name */
+    .nav-left {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    /* Right Section for Links */
+    .nav-right {
+      display: flex;
+      gap: 30px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: white;
+      font-size: 18px;
+    }
+
+    nav a:hover{
+      text-decoration:underline;
+      color:#FF9500
+    }
+    section {
+     min-height:fit-content;
+      display: flex;
+      justify-content: center;
+      background-color:bisque;
+    }
     .calculator {
-      margin-top: 40px;
-      background: #fff;
-      padding: 20px;
-      border-radius: 16px;
-      width: 320px;
-    }
+      background:#333;
+      max-height:max-content;
+      border-radius: 20px;
+      margin:50px;
+      padding:2rem;
 
+    }
     #display {
       width: 100%;
-      height: 60px;
-      font-size: 24px;
+      height: 80px;
+      font-size: 2.5rem;
       text-align: right;
-      padding: 10px;
-      margin-bottom: 20px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      background-color: #f9f9f9;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      background: #f8f8f8;
     }
-
     .buttons {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
+      gap: 0.8rem;
     }
 
     button {
-      padding: 20px;
-      font-size: 18px;
+      padding: 1.2rem;
+      font-size: 1.2rem;
       border: none;
-      border-radius: 10px;
-      background-color: #e0e0e0;
+      border-radius: 12px;
       cursor: pointer;
       transition: 0.2s;
     }
 
-    button:hover {
-      background-color: #ccc;
+    .operator { background:chartreuse; color: white; }
+    .equals { background: #007AFF; color: white; }
+    .clear { background: #FF3B30; color: white; }
+    .gray { background: #A5A5A5; color: black; }
+
+    #features {
+      margin:60px;
+      background:#A5A5A5;
+      border-radius: 20px;
+  
+    }
+    .contact-icons {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+     
     }
 
-    .operator {
-      background-color: #4CAF50;
-      color: white;
+    .contact-icons a {
+      color:#333;
+      font-size: 2.5rem;
+    
     }
 
-    .operator:hover {
-      background-color: #45a049;
-    }
-
-    .equals {
-      background-color: #2196F3;
-      color: white;
-    }
-
-    .equals:hover {
-      background-color: #1976D2;
-    }
-
-    .clear {
-      background-color: #f44336;
-      color: white;
-    }
-
-    .clear:hover {
-      background-color: #d32f2f;
-    }
-
-    footer {
-      margin-top: auto;
-      width: 100%;
-      background-color: #333;
-      color: white;
-      text-align: center;
-      padding: 30px;
+    .contact-icons a:hover {
+      color:#FF9500;
     }
   </style>
 </head>
 <body>
 
-  <header>My Calculator</header>
-
-  <div class="calculator">
-    <input type="text" id="display" readonly>
-
-    <div class="buttons">
-      <button class="clear" onclick="clearDisplay()">AC</button>
-      <button onclick="deleteChar()">←</button>
-      <button onclick="append('.')">.</button>
-      <button class="operator" onclick="append('/')">÷</button>
-
-      <button onclick="append('7')">7</button>
-      <button onclick="append('8')">8</button>
-      <button onclick="append('9')">9</button>
-      <button class="operator" onclick="append('*')">×</button>
-
-      <button onclick="append('4')">4</button>
-      <button onclick="append('5')">5</button>
-      <button onclick="append('6')">6</button>
-      <button class="operator" onclick="append('-')">−</button>
-
-      <button onclick="append('1')">1</button>
-      <button onclick="append('2')">2</button>
-      <button onclick="append('3')">3</button>
-      <button class="operator" onclick="append('+')">+</button>
-
-      <button onclick="append('0')">0</button>
-      <button style="grid-column: span 2;" class="equals" onclick="calculate()">=</button>
+  <nav>
+    <!-- Left Section for Name -->
+    <div class="nav-left"><strong style="color: #FF9500;">AKHILA'S</strong> <strong style="color: bisque;">CALCULATOR</strong></div>
+    
+    <!-- Right Section for Links -->
+    <div class="nav-right">
+      <a href="#home" onclick="showSection('home')" id="homeLink">Home</a>
+      <a href="#features" onclick="showSection('features')" id="featuresLink">Features</a>
+      <a href="#join" onclick="showSection('join')" id="joinLink">Join Us</a>
     </div>
-  </div>
+  </nav>
 
-  <footer>© 2025 Akhila's Full Calculator</footer>
+  <!-- Home Section (Calculator) -->
+  <section id="home" class="active">
+    <div class="calculator">
+      <input type="text" id="display" readonly>
+
+      <div class="buttons">
+        <button class="clear" onclick="clearDisplay()">AC</button>
+        <button onclick="deleteChar()">Backspace</button>
+        <button onclick="append('.')">.</button>
+        <button class="operator" onclick="append('/')">÷</button>
+
+        <button onclick="append('7')">7</button>
+        <button onclick="append('8')">8</button>
+        <button onclick="append('9')">9</button>
+        <button class="operator" onclick="append('*')">×</button>
+
+        <button onclick="append('4')">4</button>
+        <button onclick="append('5')">5</button>
+        <button onclick="append('6')">6</button>
+        <button class="operator" onclick="append('-')">−</button>
+
+        <button onclick="append('1')">1</button>
+        <button onclick="append('2')">2</button>
+        <button onclick="append('3')">3</button>
+        <button class="operator" onclick="append('+')">+</button>
+
+        <button onclick="append('0')">0</button>
+        <button class="equals" onclick="calculate()">=</button>
+
+        <!-- Extra Buttons -->
+        <button class="operator" onclick="append('%')">%</button>
+        <button class="operator" onclick="toggleSign()">±</button>
+       <!-- New buttons added here -->
+        <button class="operator" onclick="append('(')">(</button>
+        <button class="operator" onclick="append(')')">)</button>
+        <button class="operator" onclick="append('sqrt(')">√</button>
+        <button class="operator" onclick="append('**')">^</button>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="features">
+    <div id="features-content">
+      <h2>🧮 Calculator Features</h2>
+      <div class="feature-list">
+        <h3>✅ User-Friendly Interface</h3>
+        <p>A clean and simple layout that makes it easy to use for everyone</p>
+        <h3>✅ Basic Arithmetic Operations</h3>
+        <p>Supports addition, subtraction, multiplication, and division.</p>
+        <h3>✅ Real-Time Calculations</h3>
+        <p>Instant results are shown as you press the buttons — no need to press Enter.</p>
+        <h3>✅ Responsive Design</h3>
+        <p>Works smoothly on mobile phones, tablets, and desktops.</p>
+        <h3>✅ Read-Only Display</h3>
+        <p>The calculator screen is protected so users can only use the buttons to enter values, preventing manual input errors.</p>
+        <h3>✅ Clear & Backspace Options</h3>
+        <p>Easily clear the screen or delete the last number with a single click. </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact-content">
+      <h2>Contact Us</h2>
+    <p>Feel free to reach out to me!</p>
+      <div class="contact-icons">
+        <a href="https://www.linkedin.com/in/akhila-chowdary-naidu-215b22349/" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/Akhila-2006" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="tel:+91 8019982006"><i class="fas fa-phone"></i></a>
+        <a href="mailto:akhilachowdarynaidu@email.com"><i class="fas fa-envelope"></i></a>
+      </div>
+        <p>© 2025 Akhila's Full Calculator</p>
+    </div>
+  </section>
 
   <script>
+    // Calculator functionality
     const display = document.getElementById('display');
 
     function append(value) {
@@ -145,8 +222,17 @@
       display.value = '';
     }
 
-    function deleteChar() {
-      display.value = display.value.slice(0, -1);
+    function percentage() {
+      try {
+        display.value = eval(display.value) / 100;
+      } catch {
+        display.value = "Error";
+      }
+    }
+
+    function toggleSign() {
+      display.value = display.value.startsWith('-') ? 
+        display.value.slice(1) : `-${display.value}`;
     }
 
     function calculate() {
@@ -156,6 +242,31 @@
         display.value = "Error";
       }
     }
+ function deleteChar() {
+      display.value = display.value.slice(0, -1);
+    }
+    // Navigation functionality
+    function setActive(clickedLink) {
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+      });
+      clickedLink.classList.add('active');
+      
+      document.querySelectorAll('section').forEach(section => {
+        section.classList.remove('active');
+      });
+      document.querySelector(clickedLink.getAttribute('href')).classList.add('active');
+    }
+
+    // Smooth scroll for manual scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
   </script>
 
 </body>
